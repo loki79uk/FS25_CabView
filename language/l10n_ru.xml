@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<l10n>
+	<texts>
+		<text name="input_CABVIEW_LEAN_FORWARD" text="Наклониться вперёд"/>
+		<text name="input_CABVIEW_LEAN_TOGGLE" text="Наклониться вперёд (Без автовозврата)"/>
+    </texts>
+</l10n>

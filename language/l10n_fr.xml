@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<l10n>
+	<texts>
+		<text name="input_CABVIEW_LEAN_FORWARD" text="Se pencher en avant"/>
+		<text name="input_CABVIEW_LEAN_TOGGLE" text="Se pencher en avant (permanent)"/>
+    </texts>
+</l10n>

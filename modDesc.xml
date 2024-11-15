@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<modDesc descVersion="92">
+	<author>loki_79</author>
+    <version>1.0.0.0</version>
+	<title>
+        <en>Realistic Cab View</en>
+        <de>Realistische Kabinenansicht</de>
+    </title>
+    <description>
+<en><![CDATA[Description:
+This mod is designed to add realism to the first person view from inside vehicles.  It now allows a better view for reversing or attaching implements by allowing the player to lean around the cab in any direction.
+
+Features:
+- Full leaning allowed inside the cabin for a better view out of the windows
+- Rotation is limited +/-180 degrees when turning to look out of the rear window
+- A small amount of camera movement is added to simulate leaning when looking over your shoulder
+- All interior vehicle cameras are set to the 'Field of View' that is defined in the game settings
+
+Hotkeys:
+SHIFT = Lean Forwards
+
+Note:
+There is occasionally some clipping on vehicles with small cabs.  I have limited the leaning range on certain vehicles without rear windows (e.g. cars and trucks).
+
+GitHub-Link: https://github.com/loki79uk/FS25_CabView
+]]>
+</en>
+<de><![CDATA[Beschreibung:
+Dieser einfache Mod wurde entwickelt, um die First-Person-Ansicht aus dem Fahrzeuginneren realistischer zu gestalten. Er verhindert, dass sich die Kamera des Spielers innerhalb der Fahrzeugkabine mehrfach dreht. Er fügt auch eine kleine Neigung zur Seite (um den Sitz herum) hinzu, wenn man aus dem Heckfenster schaut.
+
+Merkmale:
+- Vollständiges Anlehnen innerhalb der Kabine für eine bessere Sicht aus den Fenstern erlaubt
+- Die Drehung ist auf +/-180 Grad begrenzt, wenn man sich dreht, um aus dem Heckfenster zu schauen
+- Eine kleine Kamerabewegung wird hinzugefügt, um das Anlehnen beim Blick über die Schulter zu simulieren
+- Alle Fahrzeuginnenkameras sind auf das in den Spieleinstellungen festgelegte 'Sichtfeld' eingestellt
+
+Tastenkombinationen:
+SHIFT = Blick nach vorne lehnen
+ 
+Anmerkung:
+Gelegentlich gibt es einige Ausschnitte an Fahrzeugen mit kleinen Kabinen. Ich habe den Anlehnungsbereich bei bestimmten Fahrzeugen ohne Heckscheibe (z.B. PKW und LKW) eingeschränkt.
+
+GitHub-Link: https://github.com/loki79uk/FS25_CabView
+]]>
+</de>
+    </description>
+	
+	<multiplayer supported="true" />
+	<iconFilename>icon_CabView.dds</iconFilename>
+	<extraSourceFiles>
+		<sourceFile filename="register.lua" />
+	</extraSourceFiles>
+	
+	<l10n filenamePrefix="language/l10n" />
+	
+	<actions>
+		<action name="CABVIEW_LEAN_FORWARD" category="VEHICLE" axisType="HALF" ignoreComboMask="false"/>
+		<action name="CABVIEW_LEAN_TOGGLE" category="VEHICLE" axisType="HALF" ignoreComboMask="false"/>
+	</actions>
+	<inputBinding>
+		<actionBinding action="CABVIEW_LEAN_FORWARD" >
+			<binding device="KB_MOUSE_DEFAULT" input="KEY_lshift" />
+		</actionBinding>
+		<actionBinding action="CABVIEW_LEAN_TOGGLE" >
+			<binding device="KB_MOUSE_DEFAULT" input="" />
+		</actionBinding>
+	</inputBinding>	
+
+</modDesc>

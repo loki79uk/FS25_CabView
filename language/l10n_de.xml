@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<l10n>
+	<texts>
+		<text name="input_CABVIEW_LEAN_FORWARD" text="Blick nach vorne lehnen"/>
+		<text name="input_CABVIEW_LEAN_TOGGLE" text="Blick nach vorne lehnen (Umschalten)"/>
+    </texts>
+</l10n>
