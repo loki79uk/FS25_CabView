@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="no" ?>
 <l10n>
 	<texts>
-		<text name="input_CABVIEW_LEAN_FORWARD" text="Lean Forwards"/>
-		<text name="input_CABVIEW_LEAN_TOGGLE" text="Lean Forwards (Toggle)"/>
+		<text name="input_CABVIEW_LEAN_FORWARD" text="İleriye Doğru Eğil"/>
+		<text name="input_CABVIEW_LEAN_TOGGLE" text="İleriye Doğru Eğil (Değiştir)"/>
     </texts>
 </l10n>
