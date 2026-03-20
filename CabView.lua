@@ -35,6 +35,13 @@ function CabView:onRegisterActionEvents(isActiveForInput, isActiveForInputIgnore
 			_, actionEventId = InputBinding.registerActionEvent(g_inputBinding, 'CABVIEW_LEAN_TOGGLE', self, CabView.KeyDown_LeanToggle, true, true, false, true)
 			g_inputBinding:setActionEventTextPriority(actionEventId, GS_PRIO_VERY_LOW)
 			g_inputBinding:setActionEventTextVisibility(actionEventId, false)
+			
+			_, actionEventId = self:addActionEvent(spec.actionEvents, "CABVIEW_RESET_VIEW", self, CabView.KeyDown_ResetView, true, true, false, true, true, nil )
+			g_inputBinding:setActionEventTextPriority(actionEventId, GS_PRIO_VERY_LOW)
+			g_inputBinding:setActionEventTextVisibility(actionEventId, false)
+			_, actionEventId = InputBinding.registerActionEvent(g_inputBinding, 'CABVIEW_RESET_VIEW', self, CabView.KeyDown_ResetView, true, true, false, true)
+			g_inputBinding:setActionEventTextPriority(actionEventId, GS_PRIO_VERY_LOW)
+			g_inputBinding:setActionEventTextVisibility(actionEventId, false)
 		end
 	end
 end
@@ -119,6 +126,15 @@ function CabView:KeyDown_LeanToggle(actionName, inputValue)
 	end
 end
 
+function CabView:KeyDown_ResetView(actionName, inputValue)
+	-- print("RESET VIEW")
+	local spec = self[CabView.specName]
+	if spec then
+		if inputValue == 1 then
+			spec.resetView = true
+		end
+	end
+end
 
 function CabView:vehicleCameraUpdate(superFunc, dt)
 
@@ -174,7 +190,8 @@ function CabView:vehicleCameraUpdate(superFunc, dt)
                     self.rotX = self.rotX - value
                 end
                 if self.limit then
-                    self.rotX = math.min(self.rotMaxX, math.max(self.rotMinX, self.rotX))
+                    -- self.rotX = math.min(self.rotMaxX, math.max(self.rotMinX, self.rotX))
+                    self.rotX = math.min(1.3, math.max(self.rotMinX, self.rotX))
                 end
             end
         end

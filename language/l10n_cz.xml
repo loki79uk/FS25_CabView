@@ -3,5 +3,6 @@
 	<texts>
 		<text name="input_CABVIEW_LEAN_FORWARD" text="Naklonit se dopředu"/>
 		<text name="input_CABVIEW_LEAN_TOGGLE" text="Naklonit se dopředu (přepnout)"/>
+		<text name="input_CABVIEW_RESET_VIEW" text="Obnovit zobrazení"/>
     </texts>
 </l10n>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<l10n>
+	<texts>
+		<text name="input_CABVIEW_LEAN_FORWARD" text="Нахилитись вперед"/>
+		<text name="input_CABVIEW_LEAN_TOGGLE" text="Нахилитись вперед (Перемикання)"/>
+		<text name="input_CABVIEW_RESET_VIEW" text="Скинути перегляд"/>
+    </texts>
+</l10n>

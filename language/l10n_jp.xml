@@ -3,5 +3,6 @@
 	<texts>
 		<text name="input_CABVIEW_LEAN_FORWARD" text="Lean Forwards"/>
 		<text name="input_CABVIEW_LEAN_TOGGLE" text="Lean Forwards (Toggle)"/>
+		<text name="input_CABVIEW_RESET_VIEW" text="Reset View"/>
     </texts>
 </l10n>

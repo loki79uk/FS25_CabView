@@ -3,5 +3,6 @@
 	<texts>
 		<text name="input_CABVIEW_LEAN_FORWARD" text="Наклониться вперёд"/>
 		<text name="input_CABVIEW_LEAN_TOGGLE" text="Наклониться вперёд (Без автовозврата)"/>
+		<text name="input_CABVIEW_RESET_VIEW" text="Сбросить просмотр"/>
     </texts>
 </l10n>

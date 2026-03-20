@@ -3,5 +3,6 @@
 	<texts>
 		<text name="input_CABVIEW_LEAN_FORWARD" text="Se pencher en avant"/>
 		<text name="input_CABVIEW_LEAN_TOGGLE" text="Se pencher en avant (permanent)"/>
+		<text name="input_CABVIEW_RESET_VIEW" text="Réinitialiser l'affichage"/>
     </texts>
 </l10n>
