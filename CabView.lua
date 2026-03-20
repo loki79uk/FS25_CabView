@@ -12,6 +12,15 @@ function CabView.registerEventListeners(vehicleType)
 	SpecializationUtil.registerEventListener(vehicleType, "onEnterVehicle", CabView)
 	SpecializationUtil.registerEventListener(vehicleType, "onLeaveVehicle", CabView)
 	SpecializationUtil.registerEventListener(vehicleType, "onRegisterActionEvents", CabView)
+	SpecializationUtil.registerEventListener(vehicleType, "saveToXMLFile", CabView)											
+end
+
+function CabView:saveToXMLFile(xmlFile, key)
+	local spec = self[CabView.specName]
+	if spec ~= nil and spec.seatHeightOffset ~= 0 then
+		local correctedKey = key:gsub(CabView.modName..".", "")
+		setXMLFloat(xmlFile.handle, correctedKey .. "#seatHeightOffset", spec.seatHeightOffset or 0)
+	end
 end
 
 function CabView:onRegisterActionEvents(isActiveForInput, isActiveForInputIgnoreSelection)
@@ -33,6 +42,20 @@ function CabView:onRegisterActionEvents(isActiveForInput, isActiveForInputIgnore
 			g_inputBinding:setActionEventTextPriority(actionEventId, GS_PRIO_VERY_LOW)
 			g_inputBinding:setActionEventTextVisibility(actionEventId, false)
 			_, actionEventId = InputBinding.registerActionEvent(g_inputBinding, 'CABVIEW_LEAN_TOGGLE', self, CabView.KeyDown_LeanToggle, true, true, false, true)
+			g_inputBinding:setActionEventTextPriority(actionEventId, GS_PRIO_VERY_LOW)
+			g_inputBinding:setActionEventTextVisibility(actionEventId, false)
+			
+			_, actionEventId = self:addActionEvent(spec.actionEvents, "CABVIEW_RAISE_SEAT", self, CabView.KeyDown_SeatRaise, true, true, false, true, true, nil )
+			g_inputBinding:setActionEventTextPriority(actionEventId, GS_PRIO_VERY_LOW)
+			g_inputBinding:setActionEventTextVisibility(actionEventId, false)
+			_, actionEventId = InputBinding.registerActionEvent(g_inputBinding, 'CABVIEW_RAISE_SEAT', self, CabView.KeyDown_SeatRaise, true, true, false, true)
+			g_inputBinding:setActionEventTextPriority(actionEventId, GS_PRIO_VERY_LOW)
+			g_inputBinding:setActionEventTextVisibility(actionEventId, false)
+			
+			_, actionEventId = self:addActionEvent(spec.actionEvents, "CABVIEW_LOWER_SEAT", self, CabView.KeyDown_SeatLower, true, true, false, true, true, nil )
+			g_inputBinding:setActionEventTextPriority(actionEventId, GS_PRIO_VERY_LOW)
+			g_inputBinding:setActionEventTextVisibility(actionEventId, false)
+			_, actionEventId = InputBinding.registerActionEvent(g_inputBinding, 'CABVIEW_LOWER_SEAT', self, CabView.KeyDown_SeatLower, true, true, false, true)
 			g_inputBinding:setActionEventTextPriority(actionEventId, GS_PRIO_VERY_LOW)
 			g_inputBinding:setActionEventTextVisibility(actionEventId, false)
 			
@@ -67,6 +90,7 @@ function CabView:onLoad(savegame)
 		for index, cameraBase in pairs(self.spec_enterable.cameras) do
 			if cameraBase.isInside then
 				spec.indoorCameraNode = cameraBase.cameraNode or cameraBase.cameraPositionNode
+				spec.cameraPositionNode = cameraBase.cameraPositionNode
 				
 				spec.originalRotX = cameraBase.origRotX
 				spec.originalRotY = cameraBase.origRotY%(2*math.pi)
@@ -83,6 +107,12 @@ function CabView:onLoad(savegame)
 				
 			end
 		end
+	end
+	
+	spec.seatHeightOffset = 0
+	spec.seatAdjustDirection = 0
+	if savegame ~= nil and savegame.xmlFile ~= nil then
+		spec.seatHeightOffset = getXMLFloat(savegame.xmlFile.handle, savegame.key .. ".cabView#seatHeightOffset") or 0
 	end
 end
 
@@ -119,20 +149,34 @@ end
 function CabView:KeyDown_LeanToggle(actionName, inputValue)
 	-- print("LEAN TOGGLE")
 	local spec = self[CabView.specName]
+	if spec and inputValue == 1 then
+		spec.leanButtonPressed = not spec.leanButtonPressed
+	end
+end
+
+function CabView:KeyDown_SeatRaise(actionName, inputValue)
+	-- print("RAISE SEAT POSITION")
+	local spec = self[CabView.specName]
 	if spec then
-		if inputValue == 1 then
-			spec.leanButtonPressed = not spec.leanButtonPressed
-		end
+		spec.seatRaiseButtonPressed = inputValue == 1
+		spec.seatAdjustDirection = 1
+	end
+end
+
+function CabView:KeyDown_SeatLower(actionName, inputValue)
+	-- print("LOWER SEAT POSITION")
+	local spec = self[CabView.specName]
+	if spec then
+		spec.seatLowerButtonPressed = inputValue == 1
+		spec.seatAdjustDirection = -1
 	end
 end
 
 function CabView:KeyDown_ResetView(actionName, inputValue)
 	-- print("RESET VIEW")
 	local spec = self[CabView.specName]
-	if spec then
-		if inputValue == 1 then
-			spec.resetView = true
-		end
+	if spec and inputValue == 1 then
+		spec.resetView = true
 	end
 end
 
@@ -288,6 +332,12 @@ function CabView:vehicleCameraUpdate(superFunc, dt)
 			local totalForward = 0
 			-- shift camera direction angle to range from -pi to +pi (instead of 0 to 2pi)
 			local angle = math.clamp(self.rotY-(math.pi+spec.rotationOffset), -math.pi, math.pi)
+			
+			-- RAISE/LOWER SEAT based on control inputs
+			if spec.seatRaiseButtonPressed or spec.seatLowerButtonPressed then
+				local delta = spec.seatAdjustDirection * dt/5000
+				spec.seatHeightOffset = math.clamp(spec.seatHeightOffset+delta, -0.20, 0.20)
+			end
 
 			-- INCREASE/DECREASE LEANING based on control inputs
 			if spec.leanButtonPressed then
@@ -337,6 +387,9 @@ function CabView:vehicleCameraUpdate(superFunc, dt)
 				self.transX = self.transX + totalSide*math.cos(-spec.rotationOffset) - totalForward*math.sin(-spec.rotationOffset)
 				self.transZ = self.transZ + totalSide*math.sin(-spec.rotationOffset) + totalForward*math.cos(-spec.rotationOffset)
 			end
+			
+			-- ADJUST SEAT HEIGHT
+			self.transY = self.transY + spec.seatHeightOffset
 		else
 			spec.isInsideCamera = false
 			spec.leanButtonPressed = false

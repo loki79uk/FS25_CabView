@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="no" ?>
 <modDesc descVersion="92">
 	<author>loki_79</author>
-    <version>1.0.0.1</version>
+    <version>1.0.0.2</version>
 	<title>
         <en>Realistic Cab View</en>
         <de>Realistische Kabinenansicht</de>
@@ -56,6 +56,8 @@ GitHub-Link: https://github.com/loki79uk/FS25_CabView
 	<actions>
 		<action name="CABVIEW_LEAN_FORWARD" category="VEHICLE" axisType="HALF" ignoreComboMask="false"/>
 		<action name="CABVIEW_LEAN_TOGGLE" category="VEHICLE" axisType="HALF" ignoreComboMask="false"/>
+		<action name="CABVIEW_RAISE_SEAT" category="VEHICLE" axisType="HALF" ignoreComboMask="false"/>
+		<action name="CABVIEW_LOWER_SEAT" category="VEHICLE" axisType="HALF" ignoreComboMask="false"/>
 		<action name="CABVIEW_RESET_VIEW" category="VEHICLE" axisType="HALF" ignoreComboMask="false"/>
 	</actions>
 	<inputBinding>
@@ -63,6 +65,12 @@ GitHub-Link: https://github.com/loki79uk/FS25_CabView
 			<binding device="KB_MOUSE_DEFAULT" input="KEY_lshift" />
 		</actionBinding>
 		<actionBinding action="CABVIEW_LEAN_TOGGLE" >
+			<binding device="KB_MOUSE_DEFAULT" input="" />
+		</actionBinding>
+		<actionBinding action="CABVIEW_RAISE_SEAT" >
+			<binding device="KB_MOUSE_DEFAULT" input="" />
+		</actionBinding>
+		<actionBinding action="CABVIEW_LOWER_SEAT" >
 			<binding device="KB_MOUSE_DEFAULT" input="" />
 		</actionBinding>
 		<actionBinding action="CABVIEW_RESET_VIEW" >

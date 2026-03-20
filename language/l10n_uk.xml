@@ -3,6 +3,8 @@
 	<texts>
 		<text name="input_CABVIEW_LEAN_FORWARD" text="Нахилитись вперед"/>
 		<text name="input_CABVIEW_LEAN_TOGGLE" text="Нахилитись вперед (Перемикання)"/>
+		<text name="input_CABVIEW_RAISE_SEAT" text="Підняти сидіння"/>
+		<text name="input_CABVIEW_LOWER_SEAT" text="Опустити сидіння"/>
 		<text name="input_CABVIEW_RESET_VIEW" text="Скинути перегляд"/>
     </texts>
 </l10n>

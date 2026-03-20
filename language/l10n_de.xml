@@ -3,6 +3,8 @@
 	<texts>
 		<text name="input_CABVIEW_LEAN_FORWARD" text="Blick nach vorne lehnen"/>
 		<text name="input_CABVIEW_LEAN_TOGGLE" text="Blick nach vorne lehnen (Umschalten)"/>
+		<text name="input_CABVIEW_RAISE_SEAT" text="Sitz höher stellen"/>
+		<text name="input_CABVIEW_LOWER_SEAT" text="Sitz tiefer stellen"/>
 		<text name="input_CABVIEW_RESET_VIEW" text="Ansicht zurücksetzen"/>
     </texts>
 </l10n>
